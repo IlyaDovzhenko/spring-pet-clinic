@@ -5,6 +5,23 @@
     <title>Owners List</title>
 </head>
 <body>
-<h2 th:text="'List of Owners.'">List of Owners.</h2>
+    <h2 th:text="'List of Owners.'">List of Owners.</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Fist Name</th>
+                <th>LastName</th>
+            </tr>
+        </thead>
+        <tbody>
+        <!--/*@thymesVar id="owners" type="com.springframework.springpetclinic.model.Owner"*/-->
+            <tr th:each="owner : ${owners}">
+                <td th:text="${owner.id}">1</td>
+                <td th:text="${owner.firstName}">Joe</td>
+                <td th:text="${owner.lastName}">Back</td>
+            </tr>
+        </tbody>
+    </table>
 </body>
 </html>
