@@ -3,6 +3,7 @@ package com.springframework.springpetclinic.controllers.vets;
 import com.springframework.springpetclinic.services.OwnerService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @RequestMapping("/owners")
@@ -15,10 +16,10 @@ public class OwnerController {
         this.ownerService = ownerService;
     }
 
-    @RequestMapping({"","/"})
+    @GetMapping({"","/"})
     public String listOwners(Model model) {
         model.addAttribute("owners", ownerService.findAll());
-        return "/owners/owners_list";
+        return "owners/owners_list";
     }
 
 }
