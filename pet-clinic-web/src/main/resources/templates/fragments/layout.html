@@ -53,6 +53,11 @@
                       <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
                       <span>Find owners</span>
                   </li>
+
+                  <li th:replace="::menuItem ('/pets/find','pets','find pets','search','Find pets')">
+                      <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                      <span>Pets</span>
+                  </li>
   
                   <li th:replace="::menuItem ('/vets.html','vets','veterinarians','th-list','Veterinarians')">
                       <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>

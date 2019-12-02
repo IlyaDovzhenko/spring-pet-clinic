@@ -1,4 +1,4 @@
-package com.springframework.springpetclinic.controllers.vets;
+package com.springframework.springpetclinic.controllers;
 
 import com.springframework.springpetclinic.services.VetService;
 import org.springframework.stereotype.Controller;
@@ -15,7 +15,7 @@ public class VetController {
     }
 
     @GetMapping({"/vets","/vets.html","/vets/find"})
-    public String listVets(Model model) {
+    public String vetsList(Model model) {
         model.addAttribute("vets", vetService.findAll());
         return "vets/vets_list";
     }

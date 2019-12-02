@@ -1,4 +1,4 @@
-package com.springframework.springpetclinic.controllers.vets;
+package com.springframework.springpetclinic.controllers;
 
 import com.springframework.springpetclinic.services.OwnerService;
 import org.springframework.stereotype.Controller;
@@ -15,7 +15,7 @@ public class OwnerController {
     }
 
     @GetMapping({"/owners","/owners/find","owners.html"})
-    public String listOwners(Model model) {
+    public String ownersList(Model model) {
         model.addAttribute("owners", ownerService.findAll());
         return "owners/owners_list";
     }

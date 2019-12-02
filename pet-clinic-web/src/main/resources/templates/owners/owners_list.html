@@ -12,15 +12,21 @@
         <thead>
             <tr>
                 <th style="width: 150px;">ID</th>
-                <th style="width: 200px">First Name</th>
-                <th style="width: 120px">Last Name</th>
+                <th style="width: 200px">Name</th>
+                <th style="width: 120px">City</th>
+                <th style="width: 120px">Address</th>
+                <th style="width: 120px">Telephone</th>
+                <th style="width: 180px">Pets</th>
             </tr>
         </thead>
         <tbody>
             <tr th:each="owner : ${owners}">
-                <td th:text="${owner.getId()}">1</td>
-                <td th:text="${owner.getFirstName()}">Joe</td>
-                <td th:text="${owner.getLastName()}">Back</td>
+                <td th:text="${owner.getId()}">id</td>
+                <td th:text="${owner.getFirstName()} + ' ' + ${owner.getLastName()}">name</td>
+                <td th:text="${owner.getCity()}">city</td>
+                <td th:text="${owner.getAddress()}">address</td>
+                <td th:text="${owner.getTelephone()}">telephone</td>
+                <td><span th:each="pet : ${owner.getPets()}" th:text="${pet.getName()}"></span></td>
             </tr>
         </tbody>
     </table>
