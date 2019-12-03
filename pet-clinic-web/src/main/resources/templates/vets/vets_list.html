@@ -13,12 +13,14 @@
             <tr>
                 <th>ID</th>
                 <th>Name</th>
+                <th>Specialties</th>
             </tr>
         </thead>
         <tbody>
             <tr th:each="vet : ${vets}">
-                <td th:text="${vet.getId()}"></td>
-                <td th:text="${vet.getFirstName()} + ' ' + ${vet.getLastName()}"></td>
+                <td th:text="${vet.getId()}">id</td>
+                <td th:text="${vet.getFirstName()} + ' ' + ${vet.getLastName()}">name</td>
+                <td th:each="spec : ${vet.getSpecialties()}" th:text="${spec.getName()}">specialties</td>
             </tr>
         </tbody>
     </table>

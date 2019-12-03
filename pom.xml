@@ -46,6 +46,6 @@
     <scm>
         <developerConnection>scm:git:git@github.com:IlyaDovzhenko/spring-pet-clinic.git</developerConnection>
         <tag>HEAD</tag>
-  </scm>
+    </scm>
 
 </project>
