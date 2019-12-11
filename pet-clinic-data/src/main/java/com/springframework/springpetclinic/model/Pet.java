@@ -28,6 +28,6 @@ public class Pet extends BaseEntity {
     @DateTimeFormat(pattern = "yyyy-mm-dd")
     private LocalDate birthDate;
 
-    @OneToMany(mappedBy = "pet")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "pet")
     private Set<Visit> visits = new HashSet<>();
 }
