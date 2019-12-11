@@ -1,7 +1,6 @@
 package com.springframework.springpetclinic.services.map;
 
 import com.springframework.springpetclinic.model.BaseEntity;
-
 import java.util.*;
 
 public abstract class AbstractServiceMap<T extends BaseEntity, ID extends Long> {
