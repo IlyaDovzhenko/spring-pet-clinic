@@ -9,7 +9,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Service
-@Profile("jpa_service")
+@Profile("jpa-service")
 public class OwnerJpaService implements OwnerService {
 
     private final OwnerRepository ownerRepository;
