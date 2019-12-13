@@ -5,7 +5,6 @@ import com.springframework.springpetclinic.repositories.VisitRepository;
 import com.springframework.springpetclinic.services.VisitService;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
-
 import java.util.HashSet;
 import java.util.Set;
 

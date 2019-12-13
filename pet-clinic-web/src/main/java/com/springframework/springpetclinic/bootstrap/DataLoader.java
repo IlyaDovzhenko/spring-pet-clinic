@@ -15,17 +15,20 @@ public class DataLoader implements CommandLineRunner {
     private final PetTypeService petTypeService;
     private final PetService petService;
     private final SpecialtyService specialtyService;
+    private final VisitService visitService;
 
     public DataLoader(OwnerService ownerService,
                       VetService vetService,
                       PetTypeService petTypeService,
                       PetService petService,
-                      SpecialtyService specialtyService) {
+                      SpecialtyService specialtyService,
+                      VisitService visitService) {
         this.ownerService = ownerService;
         this.vetService = vetService;
         this.petTypeService = petTypeService;
         this.petService = petService;
         this.specialtyService = specialtyService;
+        this.visitService = visitService;
     }
 
     @Override
@@ -49,13 +52,13 @@ public class DataLoader implements CommandLineRunner {
         pet1.setName("Gav-Gav");
         pet1.setPetType(savedDogPetType);
         pet1.setBirthDate(LocalDate.now());
-        petService.save(pet1);
+        //petService.save(pet1);
 
         Pet pet2 = new Pet();
         pet2.setName("Meo-Meo");
         pet2.setPetType(savedCatPetType);
         pet2.setBirthDate(LocalDate.now());
-        petService.save(pet2);
+        //petService.save(pet2);
 
         Pet pet3 = new Pet();
         pet3.setName("Mew");
@@ -72,6 +75,7 @@ public class DataLoader implements CommandLineRunner {
         pet1.setOwner(owner1);
         owner1.getPets().add(pet1);
         ownerService.save(owner1);
+        petService.save(pet1);
 
         Owner owner2 = new Owner();
         owner2.setFirstName("Fiona");
@@ -80,10 +84,9 @@ public class DataLoader implements CommandLineRunner {
         owner2.setAddress("4 Millwall");
         owner2.setTelephone("1232134233234");
         pet2.setOwner(owner2);
-        //pet3.setOwner(owner2);
         owner2.getPets().add(pet2);
-        //owner2.getPets().add(pet3);
         ownerService.save(owner2);
+        petService.save(pet2);
 
         System.out.println("Loading owners by " + ownerService.getClass().getName());
 
@@ -115,5 +118,19 @@ public class DataLoader implements CommandLineRunner {
         vetService.save(vet2);
 
         System.out.println("Loading vets by " + vetService.getClass().getName());
+
+        Visit visit1 = new Visit();
+        visit1.setDescription("visit1");
+        visit1.setDate(LocalDate.now());
+        visit1.setPet(pet1);
+        visit1.setVet(vet1);
+        visitService.save(visit1);
+
+        Visit visit2 = new Visit();
+        visit2.setDescription("visit2");
+        visit2.setDate(LocalDate.now());
+        visit2.setPet(pet2);
+        visit2.setVet(vet2);
+        visitService.save(visit2);
     }
 }
