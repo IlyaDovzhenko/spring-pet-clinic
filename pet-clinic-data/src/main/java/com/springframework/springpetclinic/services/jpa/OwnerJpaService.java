@@ -1,11 +1,11 @@
 package com.springframework.springpetclinic.services.jpa;
 
 import com.springframework.springpetclinic.model.Owner;
-import com.springframework.springpetclinic.model.Pet;
 import com.springframework.springpetclinic.repositories.OwnerRepository;
 import com.springframework.springpetclinic.repositories.PetRepository;
 import com.springframework.springpetclinic.repositories.PetTypeRepository;
 import com.springframework.springpetclinic.services.OwnerService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 import java.util.HashSet;
@@ -13,6 +13,7 @@ import java.util.Set;
 
 @Service
 @Profile("spring_data_jpa_service")
+@Slf4j
 public class OwnerJpaService implements OwnerService {
 
     private final OwnerRepository ownerRepository;
@@ -25,6 +26,7 @@ public class OwnerJpaService implements OwnerService {
         this.ownerRepository = ownerRepository;
         this.petRepository = petRepository;
         this.petTypeRepository = petTypeRepository;
+        log.info("Repositories are loaded!");
     }
 
     @Override
