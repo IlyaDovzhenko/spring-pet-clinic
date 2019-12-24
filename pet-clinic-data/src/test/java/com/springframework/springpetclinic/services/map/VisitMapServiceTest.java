@@ -68,17 +68,41 @@ class VisitMapServiceTest {
     @Test
     void saveWhenThrowException() {
         Visit visit = Visit.builder().build();
-        RuntimeException exception = 
+        RuntimeException exception =
                 assertThrows(RuntimeException.class, () -> visitMapService.save(visit));
         assertEquals("Invalid visit!", exception.getMessage());
-
     }
 
     @Test
     void delete() {
+        visitMapService.delete(visitMapService.findById(visitId));
+        assertNull(visitMapService.findById(visitId));
+        assertEquals(0, visitMapService.findAll().size());
+    }
+
+    @Test
+    void deleteNull() {
+        visitMapService.delete(null);
+        assertEquals(1, visitMapService.findAll().size());
     }
 
     @Test
     void deleteById() {
+        visitMapService.deleteById(visitId);
+        assertNull(visitMapService.findById(visitId));
+        assertEquals(0, visitMapService.findAll().size());
+    }
+
+    @Test
+    void deleteByWrongId() {
+        Long wrongId = 5L;
+        visitMapService.deleteById(wrongId);
+        assertEquals(1, visitMapService.findAll().size());
+    }
+
+    @Test
+    void deleteByNullId() {
+        visitMapService.deleteById(null);
+        assertEquals(1, visitMapService.findAll().size());
     }
 }

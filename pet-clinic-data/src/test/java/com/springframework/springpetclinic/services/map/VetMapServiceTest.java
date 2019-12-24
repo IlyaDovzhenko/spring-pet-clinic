@@ -75,8 +75,7 @@ class VetMapServiceTest {
 
     @Test
     void deleteByNullId() {
-        Long nullId = null;
-        vetMapService.deleteById(nullId);
+        vetMapService.deleteById(null);
         assertEquals(1, vetMapService.findAll().size());
     }
 
@@ -89,8 +88,7 @@ class VetMapServiceTest {
 
     @Test
     void deleteNull() {
-        Vet nullVet = null;
-        vetMapService.delete(nullVet);
+        vetMapService.delete(null);
         assertNotNull(vetMapService.findById(vetId));
         assertEquals(1, vetMapService.findAll().size());
     }

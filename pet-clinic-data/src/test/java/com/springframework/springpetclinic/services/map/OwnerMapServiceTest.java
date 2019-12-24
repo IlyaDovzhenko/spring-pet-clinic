@@ -9,6 +9,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -58,6 +59,23 @@ class OwnerMapServiceTest {
         Owner savedOwner = ownerMapService.save(Owner.builder().build());
         assertNotNull(savedOwner);
         assertNotNull(savedOwner.getId());
+    }
+
+    @Test
+    void saveNullObject() {
+        Owner savedOwner = ownerMapService.save(null);
+        assertNull(savedOwner);
+        assertEquals(1, ownerMapService.findAll().size());
+    }
+
+    @Test
+    void saveException() {
+        Set<Pet> pets = new HashSet<>();
+        Pet pet = Pet.builder().id(2L).build();
+        pets.add(pet);
+        Owner owner = Owner.builder().pets(pets).build();
+        RuntimeException exception = assertThrows(RuntimeException.class, () -> ownerMapService.save(owner));
+        assertEquals("Pet type is required!", exception.getMessage());
     }
 
     @Test
