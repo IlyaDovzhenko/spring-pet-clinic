@@ -6,6 +6,7 @@ import com.springframework.springpetclinic.model.PetType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Set;
@@ -26,6 +27,7 @@ class OwnerMapServiceTest {
 
     @BeforeEach
     void setUp() {
+        MockitoAnnotations.initMocks(this);
         ownerMapService = new OwnerMapService(petTypeMapService, petMapService);
         ownerMapService.save(Owner.builder().id(ownerId).lastName(testLastName).build());
     }

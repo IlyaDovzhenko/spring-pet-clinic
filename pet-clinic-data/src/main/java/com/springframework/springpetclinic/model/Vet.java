@@ -9,7 +9,6 @@ import java.util.Set;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 @Entity
 @Table(name = "vets")
 public class Vet extends Person {
@@ -24,4 +23,11 @@ public class Vet extends Person {
 
     @OneToMany(mappedBy = "vet")
     private Set<Visit> visits = new HashSet<>();
+
+    @Builder
+    public Vet(Long id, String firstName, String lastName, Set<Specialty> specialties, Set<Visit> visits) {
+        super(id, firstName, lastName);
+        this.specialties = specialties;
+        this.visits = visits;
+    }
 }
