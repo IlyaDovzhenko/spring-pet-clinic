@@ -64,11 +64,28 @@ class OwnerJpaServiceTest {
     }
 
     @Test
+    void findByIdNotFound() {
+        when(ownerRepository.findById(any())).thenReturn(Optional.empty());
+        Owner owner = ownerService.findById(2L);
+        assertNull(owner);
+        verify(ownerRepository, times(1)).findById(anyLong());
+    }
+
+    @Test
     void findByLastName() {
         when(ownerRepository.findByLastName(anyString())).thenReturn(returnedOwner);
         Owner owner = ownerService.findByLastName(ownerLastName);
         assertEquals(ownerLastName, owner.getLastName());
         verify(ownerRepository, times(1)).findByLastName(any());
+    }
+
+    @Test
+    void findByLastNameNotFound() {
+        String wrongName = "wrongName";
+        when(ownerRepository.findByLastName(anyString())).thenReturn(null);
+        Owner owner = ownerService.findByLastName(wrongName);
+        assertNull(owner);
+        verify(ownerRepository, times(1)).findByLastName(anyString());
     }
 
     @Test
@@ -78,13 +95,18 @@ class OwnerJpaServiceTest {
         Owner owner = ownerService.save(ownerToSave);
         assertNotNull(owner);
         assertEquals(ownerToSave.getId(), owner.getId());
+        verify(ownerRepository, times(1)).save(any());
     }
 
     @Test
     void delete() {
+        ownerService.delete(returnedOwner);
+        verify(ownerRepository, times(1)).delete(any());
     }
 
     @Test
     void deleteById() {
+        ownerService.deleteById(ownerId);
+        verify(ownerRepository, times(1)).deleteById(anyLong());
     }
 }
