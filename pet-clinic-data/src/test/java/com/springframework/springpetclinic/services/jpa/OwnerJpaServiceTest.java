@@ -34,7 +34,6 @@ class OwnerJpaServiceTest {
     OwnerJpaService ownerService;
 
     private Owner returnedOwner;
-
     private final Long ownerId = 1L;
     private final String ownerLastName = "OwnerName";
 
