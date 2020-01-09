@@ -14,10 +14,14 @@ public class OwnerController {
         this.ownerService = ownerService;
     }
 
-    @GetMapping({"/owners","/owners/find","owners.html"})
+    @GetMapping({"/owners","/owners.html"})
     public String ownersList(Model model) {
         model.addAttribute("owners", ownerService.findAll());
         return "owners/owners_list";
     }
 
+    @GetMapping("/owners/find")
+    public String findOwner() {
+        return "notImplemented";
+    }
 }

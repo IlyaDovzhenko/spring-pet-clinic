@@ -19,5 +19,4 @@ public class PetController {
         model.addAttribute("pets", petService.findAll());
         return "pets/pets_list";
     }
-
 }
