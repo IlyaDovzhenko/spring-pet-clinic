@@ -14,9 +14,14 @@ public class PetController {
         this.petService = petService;
     }
 
-    @GetMapping({"/pets","/pets/find","pets.html"})
+    @GetMapping({"/pets","pets.html"})
     public String petsList(Model model) {
         model.addAttribute("pets", petService.findAll());
         return "pets/pets_list";
+    }
+
+    @GetMapping("/pets/find")
+    public String findPet() {
+        return "notImplemented";
     }
 }
