@@ -24,4 +24,9 @@ public class OwnerController {
     public String findOwner() {
         return "notImplemented";
     }
+
+    @GetMapping("/owners/show")
+    public String showOwner() {
+        return "/owners/show";
+    }
 }
