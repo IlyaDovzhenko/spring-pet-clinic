@@ -1,11 +1,37 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{fragments/layout :: layout(~{::body}, 'owners')}">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Owner page</title>
 </head>
 <body>
-    <h1>This is owner page!</h1>
+<h2 th:text="'Owner page'">table_header</h2>
+<table id="owners" class="table table-striped">
+    <thead>
+        <tr>
+            <th style="width: 150px;">ID</th>
+            <th style="width: 200px">Last Name</th>
+            <th style="width: 200px">First Name</th>
+            <th style="width: 120px">City</th>
+            <th style="width: 120px">Address</th>
+            <th style="width: 120px">Telephone</th>
+            <th style="width: 180px">Pets</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td th:text="${owner.getId()}"></td>
+            <td th:text="${owner.getLastName()}"></td>
+            <td th:text="${owner.getFirstName()}"></td>
+            <td th:text="${owner.getCity()}"></td>
+            <td th:text="${owner.getAddress()}"></td>
+            <td th:text="${owner.getTelephone()}"></td>
+            <td><span th:each="pet : ${owner.getPets()}" th:text="${pet.getName()}"></span></td>
+        </tr>
+    </tbody>
+</table>
 
 </body>
 </html>

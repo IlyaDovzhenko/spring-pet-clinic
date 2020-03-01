@@ -23,7 +23,7 @@
             <tr th:each="owner : ${owners}">
                 <td th:text="${owner.getId()}">id</td>
                 <td>
-                    <a href="/owners/show" th:text="${owner.getFirstName()} + ' ' + ${owner.getLastName()}">name</a>
+                    <a href="#" th:href="@{'/owners/' + ${owner.getId()} + '/show'}" th:text="${owner.getFirstName()} + ' ' + ${owner.getLastName()}">name</a>
                 </td>
                 <td th:text="${owner.getCity()}">city</td>
                 <td th:text="${owner.getAddress()}">address</td>
