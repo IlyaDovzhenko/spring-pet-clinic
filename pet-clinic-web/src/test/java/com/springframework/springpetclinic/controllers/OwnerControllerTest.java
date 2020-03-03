@@ -14,8 +14,9 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import java.util.HashSet;
 import java.util.Set;
 
-import static org.hamcrest.Matchers.hasSize;
+import static org.hamcrest.Matchers.*;
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.verifyNoInteractions;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -73,5 +74,20 @@ class OwnerControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(view().name("notImplemented"));
         verifyNoInteractions(ownerService);
+    }
+
+    @Test
+    void showOwnerTest() throws Exception {
+        //given
+        Owner returnedOwner = Owner.builder().id(firstOwnerId).firstName(firstOwnerName).build();
+
+        //when
+        when(ownerService.findById(anyLong())).thenReturn(returnedOwner);
+
+        //then
+        mockMvc.perform(get("/owners/" + firstOwnerId))
+                .andExpect(status().isOk())
+                .andExpect(view().name("/owners/ownerDetails"))
+                .andExpect(model().attribute("owner", hasProperty("id", is(firstOwnerId))));
     }
 }

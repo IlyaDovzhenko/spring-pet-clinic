@@ -5,6 +5,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class OwnerController {
@@ -26,9 +28,10 @@ public class OwnerController {
         return "notImplemented";
     }
 
-    @GetMapping("/owners/{ownerId}/show")
-    public String showOwner(@PathVariable Long ownerId, Model model) {
-        model.addAttribute("owner", ownerService.findById(ownerId));
-        return "/owners/show";
+    @GetMapping("/owners/{ownerId}")
+    public ModelAndView showOwner(@PathVariable Long ownerId) {
+        ModelAndView modelAndView = new ModelAndView("/owners/ownerDetails");
+        modelAndView.addObject(ownerService.findById(ownerId));
+        return modelAndView;
     }
 }
