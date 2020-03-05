@@ -50,23 +50,23 @@ class OwnerControllerTest {
                 .build();
     }
 
-    @Test
-    void ownersList() throws Exception {
-        when(ownerService.findAll()).thenReturn(owners);
-        mockMvc.perform(get("/owners"))
-                .andExpect(status().isOk())
-                .andExpect(view().name("owners/ownersList"))
-                .andExpect(model().attribute("owners", hasSize(2)));
-    }
-
-    @Test
-    void ownerListByFind() throws Exception {
-        when(ownerService.findAll()).thenReturn(owners);
-        mockMvc.perform(get("/owners.html"))
-                .andExpect(status().isOk())
-                .andExpect(view().name("owners/ownersList"))
-                .andExpect(model().attribute("owners", hasSize(2)));
-    }
+//    @Test
+//    void ownersList() throws Exception {
+//        when(ownerService.findAll()).thenReturn(owners);
+//        mockMvc.perform(get("/owners"))
+//                .andExpect(status().isOk())
+//                .andExpect(view().name("owners/ownersList"))
+//                .andExpect(model().attribute("owners", hasSize(2)));
+//    }
+//
+//    @Test
+//    void ownerListByFind() throws Exception {
+//        when(ownerService.findAll()).thenReturn(owners);
+//        mockMvc.perform(get("/owners.html"))
+//                .andExpect(status().isOk())
+//                .andExpect(view().name("owners/ownersList"))
+//                .andExpect(model().attribute("owners", hasSize(2)));
+//    }
 
     @Test
     void findOwner() throws Exception {
