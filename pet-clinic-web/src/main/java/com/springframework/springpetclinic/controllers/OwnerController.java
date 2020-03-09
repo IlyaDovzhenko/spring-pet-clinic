@@ -18,10 +18,10 @@ import java.util.List;
 @Controller
 public class OwnerController {
 
-    private static final String CREATE_OR_UPDATE_OWNER_FORM_VIEW = "/owners/createOrUpdateForm";
-    private static final String OWNER_DETAILS_VIEW = "/owners/ownerDetails";
-    private static final String OWNERS_LIST_VIEW = "/owners/ownersList";
-    private static final String FIND_OWNERS_VIEW = "/owners/findOwners";
+    private static final String CREATE_OR_UPDATE_OWNER_FORM_VIEW = "owners/createOrUpdateOwnerForm";
+    private static final String OWNER_DETAILS_VIEW = "owners/ownerDetails";
+    private static final String OWNERS_LIST_VIEW = "owners/ownersList";
+    private static final String FIND_OWNERS_VIEW = "owners/findOwners";
 
     private final OwnerService ownerService;
 
