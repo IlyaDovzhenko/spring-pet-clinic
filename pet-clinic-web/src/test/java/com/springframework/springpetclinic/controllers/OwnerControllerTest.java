@@ -59,7 +59,7 @@ class OwnerControllerTest {
     void findOwner() throws Exception {
         mockMvc.perform(get("/owners/find"))
                 .andExpect(status().isOk())
-                .andExpect(view().name("owners/findOwners"))
+                .andExpect(view().name("/owners/findOwners"))
                 .andExpect(model().attributeExists("owner"));
         verifyNoInteractions(ownerService);
     }
@@ -87,7 +87,7 @@ class OwnerControllerTest {
         //then
         mockMvc.perform(get("/owners"))
                 .andExpect(status().isOk())
-                .andExpect(view().name("owners/findOwners"));
+                .andExpect(view().name("/owners/findOwners"));
     }
 
     @Test
@@ -116,7 +116,7 @@ class OwnerControllerTest {
         //then
         mockMvc.perform(get("/owners"))
                 .andExpect(status().isOk())
-                .andExpect(view().name("owners/ownersList"))
+                .andExpect(view().name("/owners/ownersList"))
                 .andExpect(model().attributeExists("owners"));
     }
 }
