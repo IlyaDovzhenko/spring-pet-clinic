@@ -2,11 +2,13 @@ package com.springframework.springpetclinic.bootstrap;
 
 import com.springframework.springpetclinic.model.*;
 import com.springframework.springpetclinic.services.*;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 
+@Slf4j
 @Component
 public class DataLoader implements CommandLineRunner {
 
@@ -88,7 +90,7 @@ public class DataLoader implements CommandLineRunner {
         ownerService.save(owner2);
         petService.save(pet2);
 
-        System.out.println("Loading owners by " + ownerService.getClass().getName());
+        log.info("Loading owners by " + ownerService.getClass().getName());
 
         Specialty radiology = new Specialty();
         radiology.setName("radiology");
@@ -117,7 +119,7 @@ public class DataLoader implements CommandLineRunner {
         vet2.getSpecialties().add(surgery);
         vetService.save(vet2);
 
-        System.out.println("Loading vets by " + vetService.getClass().getName());
+        log.info("Loading vets by " + vetService.getClass().getName());
 
         Visit visit1 = new Visit();
         visit1.setDescription("visit1");

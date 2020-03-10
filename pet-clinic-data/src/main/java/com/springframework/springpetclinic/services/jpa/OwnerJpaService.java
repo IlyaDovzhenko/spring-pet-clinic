@@ -27,7 +27,6 @@ public class OwnerJpaService implements OwnerService {
         this.ownerRepository = ownerRepository;
         this.petRepository = petRepository;
         this.petTypeRepository = petTypeRepository;
-        log.info("Repositories are loaded!");
     }
 
     @Override
