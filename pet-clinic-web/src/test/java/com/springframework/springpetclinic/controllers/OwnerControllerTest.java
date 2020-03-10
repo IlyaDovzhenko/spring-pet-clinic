@@ -10,6 +10,8 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -140,6 +142,23 @@ class OwnerControllerTest {
                 .andExpect(view().name("redirect:/owners/" + returnedOwner.getId()))
                 .andExpect(model().attributeExists("owner"));
         verify(ownerService, times(1)).save(any());
+    }
+
+    @Test
+    void processCreationFormWithErrorsTest() throws Exception {
+//        //given
+//        BindingResult bindingResult = mock(BindingResult.class);
+//        bindingResult.addError(new ObjectError("error", "You have an error!"));
+//
+//        //when
+//        //when(bindingResult.hasErrors()).thenReturn(true);
+//
+//        //then
+//        mockMvc.perform(post("/owners/new")
+//                .param("owner", "new owner"))
+//                .andExpect(status().isOk())
+//                .andExpect(view().name("owners/createOrUpdateOwnerForm"));
+//        verify(bindingResult, times(1)).hasErrors();
     }
 
     @Test
