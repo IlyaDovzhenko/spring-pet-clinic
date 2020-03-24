@@ -7,14 +7,10 @@
       class="form-horizontal" id="add-pet-form">
     <div class="form-group has-feedback">
         <input th:replace="~{fragments/inputField :: input('Name', 'name', 'text')}" />
-        <input th:replace="~{fragments/inputField :: input('Last Name', 'lastName', 'text')}" />
-        <input th:replace="~{fragments/inputField :: input('City', 'city', 'text')}" />
-        <input th:replace="~{fragments/inputField :: input('Address', 'address', 'text')}" />
-        <input th:replace="~{fragments/inputField :: input('Telephone', 'telephone', 'text')}" />
     </div>
     <div class="form-group">
         <div class="col-sm-offset-2 col-sm-10">
-            <button th:with="text=${owner['new']} ? 'Add Owner' : 'Update Owner'"
+            <button th:with="text=${pet['new']} ? 'Add Pet' : 'Update Pet'"
                     type="submit"
                     class="btn btn-default"
                     th:text="${text}"
