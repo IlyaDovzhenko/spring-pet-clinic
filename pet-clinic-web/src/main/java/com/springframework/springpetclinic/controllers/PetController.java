@@ -70,7 +70,12 @@ public class PetController {
             return CREATE_OR_UPDATE_PET_FORM_VIEW;
         } else {
             petService.save(pet);
-            return "redirect:/owners/{ownerId}";
+            return "redirect:/owners/" + owner.getId();
         }
+    }
+
+    @GetMapping("/pets/{petId}/edit")
+    public String initUpdateForm(@PathVariable Long petId, Model model) {
+        return null;
     }
 }
