@@ -39,7 +39,7 @@ public class PetController {
         return petTypeService.findAll();
     }
 
-    @ModelAttribute("owners")
+    @ModelAttribute("owner")
     public Owner findOwner(@PathVariable Long ownerId) {
         return ownerService.findById(ownerId);
     }
@@ -50,15 +50,21 @@ public class PetController {
     }
 
     @GetMapping("/pets/new")
-    public String initCreationForm(Owner owner, Model model) {
-        Pet pet = new Pet();
-        owner.getPets().add(pet);
+    public String initCreationForm(Model model) {
+        Pet pet = Pet.builder().build();
         model.addAttribute("pet", pet);
         return CREATE_OR_UPDATE_PET_FORM_VIEW;
     }
 
     @PostMapping("/pets/new")
-    public String processCreationForm(Owner owner, @Valid Pet pet, BindingResult bindingResult, Model model) {
+    public String processCreationForm(@PathVariable Long ownerId,
+                                      @Valid Pet pet,
+                                      BindingResult bindingResult,
+                                      Model model) {
+        Owner owner = (Owner) model.getAttribute("owner");
+        if (owner == null) {
+            return CREATE_OR_UPDATE_PET_FORM_VIEW;
+        }
         if (StringUtils.hasLength(pet.getName())
                 && pet.isNew()
                 && owner.getPet(pet.getName(), true) != null) {
@@ -70,7 +76,7 @@ public class PetController {
             return CREATE_OR_UPDATE_PET_FORM_VIEW;
         } else {
             petService.save(pet);
-            return "redirect:/owners/" + owner.getId();
+            return "redirect:/owners/" + ownerId;
         }
     }
 

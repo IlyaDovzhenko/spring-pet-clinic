@@ -14,6 +14,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.ui.Model;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -36,6 +37,9 @@ class PetControllerTest {
 
     @Mock
     private OwnerService ownerService;
+
+    @Mock
+    Model model;
 
     @InjectMocks
     private PetController petController;
@@ -79,6 +83,16 @@ class PetControllerTest {
         mockMvc.perform(post("/owners/1/pets/new"))
                 .andExpect(status().is3xxRedirection())
                 .andExpect(view().name("redirect:/owners/1"));
+        verify(ownerService, times(1)).findById(anyLong());
         verify(petService).save(any());
+    }
+
+    @Test
+    void processCreationFormWithNullOwner() throws Exception {
+        //then
+        mockMvc.perform(post("/owners/1/pets/new"))
+                .andExpect(status().isOk())
+                .andExpect(view().name(CREATE_OR_UPDATE_PET_FORM_VIEW));
+        assertNull(model.getAttribute("owner"));
     }
 }
