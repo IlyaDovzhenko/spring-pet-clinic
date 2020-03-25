@@ -1,6 +1,7 @@
 package com.springframework.springpetclinic.controllers;
 
 import com.springframework.springpetclinic.model.Owner;
+import com.springframework.springpetclinic.model.Pet;
 import com.springframework.springpetclinic.model.PetType;
 import com.springframework.springpetclinic.services.OwnerService;
 import com.springframework.springpetclinic.services.PetService;
@@ -72,6 +73,7 @@ class PetControllerTest {
     void processCreationForm() throws Exception {
         //when()
         when(ownerService.findById(anyLong())).thenReturn(owner);
+        when(petService.save(any())).thenReturn(Pet.builder().id(1L).build());
 
         //then
         mockMvc.perform(post("/owners/1/pets/new"))
