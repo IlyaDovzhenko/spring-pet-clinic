@@ -52,6 +52,8 @@ class PetControllerTest {
 
     private Set<PetType> petTypes = new HashSet<>();
 
+    private Pet returnedPet;
+
     @BeforeEach
     void setUp() {
         mockMvc = MockMvcBuilders.standaloneSetup(petController).build();
@@ -60,10 +62,12 @@ class PetControllerTest {
 
         petTypes.add(PetType.builder().id(1L).name("Cat").build());
         petTypes.add(PetType.builder().id(2L).name("Dog").build());
+
+        returnedPet = Pet.builder().id(1L).build();
     }
 
     @Test
-    void initCreationForm() throws Exception {
+    void initCreationFormTest() throws Exception {
         //then
         mockMvc.perform(get("/owners/1/pets/new"))
                 .andExpect(status().isOk())
@@ -74,7 +78,7 @@ class PetControllerTest {
     }
 
     @Test
-    void processCreationForm() throws Exception {
+    void processCreationFormTest() throws Exception {
         //when()
         when(ownerService.findById(anyLong())).thenReturn(owner);
         when(petService.save(any())).thenReturn(Pet.builder().id(1L).build());
@@ -88,11 +92,34 @@ class PetControllerTest {
     }
 
     @Test
-    void processCreationFormWithNullOwner() throws Exception {
+    void processCreationFormWithNullOwnerTest() throws Exception {
         //then
         mockMvc.perform(post("/owners/1/pets/new"))
                 .andExpect(status().isOk())
                 .andExpect(view().name(CREATE_OR_UPDATE_PET_FORM_VIEW));
         assertNull(model.getAttribute("owner"));
+    }
+
+    @Test
+    void initUpdateFormTest() throws Exception {
+        //when
+        when(petService.findById(anyLong())).thenReturn(returnedPet);
+
+        //then
+        mockMvc.perform(get("/owners/1/pets/1/edit"))
+                .andExpect(status().isOk())
+                .andExpect(view().name(CREATE_OR_UPDATE_PET_FORM_VIEW))
+                .andExpect(model().attributeExists("pet"));
+        verify(petService, times(1)).findById(anyLong());
+    }
+
+    @Test
+    void processUpdateFormTest() throws Exception {
+
+        //then
+//        mockMvc.perform(post("/owners/1/pets/1/edit"))
+//                .andExpect(status().is3xxRedirection())
+//                .andExpect(view().name("redirect:/owners/1"));
+//        verify(petService, times(1)).save(any());
     }
 }

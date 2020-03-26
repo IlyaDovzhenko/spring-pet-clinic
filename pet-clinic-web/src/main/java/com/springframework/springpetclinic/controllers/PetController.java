@@ -6,6 +6,7 @@ import com.springframework.springpetclinic.model.PetType;
 import com.springframework.springpetclinic.services.OwnerService;
 import com.springframework.springpetclinic.services.PetService;
 import com.springframework.springpetclinic.services.PetTypeService;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.time.LocalDate;
 import java.util.Collection;
 
 @Controller
@@ -51,8 +53,7 @@ public class PetController {
 
     @GetMapping("/pets/new")
     public String initCreationForm(Model model) {
-        Pet pet = Pet.builder().build();
-        model.addAttribute("pet", pet);
+        model.addAttribute("pet", Pet.builder().build());
         return CREATE_OR_UPDATE_PET_FORM_VIEW;
     }
 
@@ -71,6 +72,7 @@ public class PetController {
             bindingResult.rejectValue("name", "duplicate", "already exists");
         }
         owner.getPets().add(pet);
+        pet.setOwner(owner);
         if (bindingResult.hasErrors()) {
             model.addAttribute("pet", pet);
             return CREATE_OR_UPDATE_PET_FORM_VIEW;
@@ -93,9 +95,25 @@ public class PetController {
             model.addAttribute("pet", pet);
             return CREATE_OR_UPDATE_PET_FORM_VIEW;
         } else {
-            owner.getPets().add(pet);
-            petService.save(pet);
-            return "redirect:/owners" + owner.getId();
+            Pet oldPet = petService.findById(pet.getId());
+            if (pet.getName() != null) {
+                oldPet.setName(pet.getName());
+            }
+            if (pet.getOwner() != null && ownerService.findById(pet.getOwner().getId()) != null) {
+                oldPet.setOwner(pet.getOwner());
+            }
+            if (pet.getBirthDate() != null) {
+                oldPet.setBirthDate(pet.getBirthDate());
+            }
+            if (pet.getPetType() != null) {
+                oldPet.setPetType(pet.getPetType());
+            }
+            if (pet.getVisits() != null && pet.getVisits().size() > 0) {
+                oldPet.setVisits(pet.getVisits());
+            }
+            petService.save(oldPet);
+            ownerService.save(owner);
+            return "redirect:/owners/" + owner.getId();
         }
     }
 }
