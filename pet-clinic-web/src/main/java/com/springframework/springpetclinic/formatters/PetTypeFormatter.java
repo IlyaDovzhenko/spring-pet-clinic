@@ -26,7 +26,7 @@ public class PetTypeFormatter implements Formatter<PetType> {
                 return petType;
             }
         }
-        throw  new ParseException("Type not found: " + text, 0);
+        throw new ParseException("Type not found: " + text, 0);
     }
 
     @Override

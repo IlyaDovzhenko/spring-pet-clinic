@@ -115,11 +115,18 @@ class PetControllerTest {
 
     @Test
     void processUpdateFormTest() throws Exception {
+        //when
+        when(petService.findById(any())).thenReturn(returnedPet);
+        when(ownerService.findById(anyLong())).thenReturn(owner);
 
         //then
-//        mockMvc.perform(post("/owners/1/pets/1/edit"))
-//                .andExpect(status().is3xxRedirection())
-//                .andExpect(view().name("redirect:/owners/1"));
-//        verify(petService, times(1)).save(any());
+        mockMvc.perform(post("/owners/1/pets/1/edit"))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(view().name("redirect:/owners/1"));
+
+        verify(petService, times(1)).save(any());
+        verify(ownerService, times(1)).findById(any());
+        verify(petService, times(1)).save(any());
+        verify(ownerService, times(1)).save(any());
     }
 }

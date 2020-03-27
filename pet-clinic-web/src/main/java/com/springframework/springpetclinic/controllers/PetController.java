@@ -6,7 +6,6 @@ import com.springframework.springpetclinic.model.PetType;
 import com.springframework.springpetclinic.services.OwnerService;
 import com.springframework.springpetclinic.services.PetService;
 import com.springframework.springpetclinic.services.PetTypeService;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
@@ -15,7 +14,6 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.time.LocalDate;
 import java.util.Collection;
 
 @Controller
